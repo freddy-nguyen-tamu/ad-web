@@ -60,3 +60,14 @@ body{
   .hero-image img{max-width:100%}
   .nav{display:none}
 }
+
+/* Ad-specific */
+.acme-ad { display:flex; gap:12px; align-items:flex-start; }
+.acme-ad-media { flex:0 0 160px; max-width:160px; }
+.acme-ad-body { flex:1; }
+.acme-ad-title { margin:0 0 8px; font-size:1.1rem; }
+.acme-ad-content { color: #4b5563; }
+.acme-ad-cta { margin-top:8px; display:inline-block; }
+
+/* ad zone container */
+.acme-ad-zone { min-height:80px; }
