@@ -20,8 +20,8 @@
         <a href="#contact" class="btn btn-primary ms-3">Contact</a>
       </nav>
     </div>
-    <div class="container py-2 d-none d-md-block">
-      <?php // header ad zone ?>
+    <!-- Keep the header ad container but it will be moved by JavaScript -->
+    <div class="header-ad-original" style="display: none !important;">
       <?php acme_display_ad_zone('header'); ?>
     </div>
   </header>

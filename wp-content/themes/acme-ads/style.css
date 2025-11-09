@@ -1,3 +1,49 @@
+/* Hide the original header ad container visually but keep it in DOM */
+.container.py-2.d-none.d-md-block {
+    display: none !important;
+}
+
+/* Make the specific ad fixed and visible */
+.acme-ad[data-ad-id="15"] {
+    position: fixed !important;
+    top: 80px !important;
+    right: 20px !important;
+    width: 300px !important;
+    z-index: 9999 !important;
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+    margin: 0 !important;
+    animation: slideInRight 0.5s ease-out;
+    transition: all 0.3s ease !important;
+    display: block !important; /* Force display */
+}
+
+/* Rest of your CSS remains the same */
+.acme-ad-close {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: 24px !important;
+    height: 24px !important;
+    background: #f0f0f0 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    color: #666 !important;
+    transition: all 0.2s ease !important;
+    z-index: 10000 !important;
+}
+.acme-ad-close:hover {
+    background: #e0e0e0 !important;
+    color: #333 !important;
+    transform: scale(1.1) !important;
+}
 :root {
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: "SF Pro Display", var(--font-sans);
@@ -21,17 +67,17 @@ body {
   margin: 0;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-y: scroll; /* Ensure body always scrolls */
+  overflow-y: scroll;
 }
 
 /* ===== Header ===== */
 .site-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #eee;
-  z-index: 999;
+  z-index: 1000;
 }
 
 .header-inner {
@@ -82,10 +128,57 @@ body {
   background: #005bb5;
 }
 
-/* ===== Hero ===== */
+/* ===== Header Ad Zone ===== */
+.header-ad-container {
+  position: sticky;
+  top: 70px; /* Below main header */
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e9ecef;
+}
 
+/* Make the specific Hero – Spring Promo ad fixed */
+.acme-ad[data-ad-id="15"] {
+    position: fixed !important;
+    top: 100px !important;
+    right: 20px !important;
+    width: 300px !important;
+    z-index: 9999 !important;
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+    margin: 0 !important;
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Add space where the ad originally was */
+.container.py-2.d-none.d-md-block:has(.acme-ad[data-ad-id="15"]) {
+    min-height: 120px !important;
+}
+
+/* Fix any parent container issues */
+.acme-ad-zone[data-zone="header"],
+.container.py-2.d-none.d-md-block {
+    position: static !important;
+    overflow: visible !important;
+}
+
+/* ===== Hero ===== */
 .hero {
-  position: relative; /* Changed from any fixed/sticky positioning */
+  position: relative;
   width: 100%;
   min-height: 90vh;
   display: flex;
@@ -239,6 +332,35 @@ body {
   animation: fadeInUp 0.8s ease both;
 }
 
+/* ===== Sidebar Sticky Ad ===== */
+.sticky-ad-container {
+    position: sticky;
+    top: 100px;
+    z-index: 100;
+}
+
+/* Fix any potential overflow issues */
+.sidebar, .col-lg-4, .row {
+    overflow: visible !important;
+}
+
+/* Style the ad for better appearance */
+.acme-ad-body {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.hero {
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+body.scrolled .hero {
+    opacity: 0.4;
+    transform: translateY(-50px);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .nav {
@@ -251,19 +373,160 @@ body {
 
   .hero {
     padding: 6rem 1rem 4rem;
-    min-height: 80vh; /* Adjusted for mobile */
+    min-height: 80vh;
   }
 
   .section {
     padding: 4rem 1rem;
   }
+  
+  /* Hide fixed ad on mobile */
+  .acme-ad[data-ad-id="15"] {
+      display: none !important;
+  }
 }
 
-.hero {
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+@media (max-width: 1200px) {
+  .acme-ad[data-ad-id="15"] {
+      right: 10px !important;
+      width: 280px !important;
+  }
 }
-body.scrolled .hero {
-    opacity: 0.4;
-    transform: translateY(-50px);
+
+/* ===== Sticky Ad with Close Button ===== */
+.acme-ad[data-ad-id="15"] {
+    position: fixed !important;
+    top: 100px !important;
+    right: 20px !important;
+    width: 300px !important;
+    z-index: 9999 !important;
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+    margin: 0 !important;
+    animation: slideInRight 0.5s ease-out;
+    transition: all 0.3s ease !important;
+}
+
+/* Close button for sticky ad */
+.acme-ad-close {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: 24px !important;
+    height: 24px !important;
+    background: #f0f0f0 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    color: #666 !important;
+    transition: all 0.2s ease !important;
+    z-index: 10000 !important;
+}
+
+.acme-ad-close:hover {
+    background: #e0e0e0 !important;
+    color: #333 !important;
+    transform: scale(1.1) !important;
+}
+
+/* When ad is closed */
+.acme-ad[data-ad-id="15"].ad-closed {
+    transform: translateX(400px) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ad header with close button */
+.acme-ad-header {
+    position: relative !important;
+    padding-right: 30px !important;
+    margin-bottom: 15px !important;
+}
+
+.acme-ad-title {
+    margin: 0 !important;
+    font-size: 1.1rem !important;
+    color: #333 !important;
+}
+
+/* Show ad button when closed */
+.ad-toggle-button {
+    position: fixed !important;
+    top: 100px !important;
+    right: 20px !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: var(--color-accent) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    z-index: 9998 !important;
+    transition: all 0.3s ease !important;
+}
+
+.ad-toggle-button:hover {
+    background: #005bb5 !important;
+    transform: scale(1.1) !important;
+}
+
+.ad-toggle-button.visible {
+    display: flex !important;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Add space where the ad originally was */
+.container.py-2.d-none.d-md-block:has(.acme-ad[data-ad-id="15"]) {
+    min-height: 120px !important;
+}
+
+/* Fix any parent container issues */
+.acme-ad-zone[data-zone="header"],
+.container.py-2.d-none.d-md-block {
+    position: static !important;
+    overflow: visible !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .acme-ad[data-ad-id="15"] {
+      display: none !important;
+  }
+  
+  .ad-toggle-button {
+      display: none !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .acme-ad[data-ad-id="15"] {
+      right: 10px !important;
+      width: 280px !important;
+  }
+  
+  .ad-toggle-button {
+      right: 10px !important;
+  }
 }
 
