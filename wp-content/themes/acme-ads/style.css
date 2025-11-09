@@ -1,3 +1,19 @@
+/*
+Theme Name: Acme Ads
+Theme URI:  https://example.com/acme-ads
+Author:      You
+Author URI:  https://example.com
+Description: A lightweight advertising theme (replica of static ad-site) built for demo.
+Version:     1.0
+License:     GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: acme-ads
+Tags:        one-column, responsive, custom-background, custom-logo
+*/
+
+/* Import resets or add default styles below (we'll enqueue additional stylesheet in functions.php) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
 :root{
   --bg:#ffffff;
   --text:#1b1b1f;
