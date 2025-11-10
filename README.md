@@ -2,6 +2,10 @@
 
 This is a simple static marketing website (no database) suitable for GitHub Pages.
 
+## Where to view demo WordPress product mockup
+
+https://freddy-nguyen-tamu.github.io/ad-web/
+
 ## How to run locally
 
 Open `index.html` in a browser or use VS Code Live Server extension.
